@@ -1,38 +1,37 @@
-import React, { useEffect, useState } from 'react'
-import './generalStyle.scss'
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import "./generalStyle.scss";
+import { useNavigate } from "react-router-dom";
 
 const About = () => {
-  const navigate=useNavigate();
-  const [userData, setUserData]=useState({});
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState({});
 
-  const callAboutPage = async() => {
+  const callAboutPage = async () => {
     try {
-      const res= await fetch('/about',{
+      const res = await fetch("/abouts", {
         method: "GET",
         headers: {
-          Accept : "application/json",
-          "Content-Type": "application/json" 
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
-        credentials:"include" // for adding cookies 
-      })
+        credentials: "include", // for adding cookies
+      });
 
       const data = await res.json();
       console.log(data);
-      setUserData(data)
-
+      setUserData(data);
     } catch (error) {
       console.log(error);
-      navigate("/login")
+      navigate("/login");
     }
-  }
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     callAboutPage();
-  },[]);
+  }, []);
 
   return (
-    <div className='errorpage'>
+    <div className="errorpage">
       <h1>This Above Page is under construction </h1>
       <h1>Thank you loggin in {userData.name}</h1>
       <h2>Your Email address {userData.email}</h2>
@@ -40,7 +39,7 @@ const About = () => {
       <h2>Your profession {userData.profession}</h2>
       <h2>Kahi aur par search karlo aapne baare me</h2>
     </div>
-  )
-}
+  );
+};
 
-export default About
+export default About;
