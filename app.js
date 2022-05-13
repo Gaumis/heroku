@@ -55,6 +55,10 @@ const PORT= process.env.PORT || 5000
 //3rd step for heroku, wherein we are telling to use build index.js file for frontend
 if(process.env.NODE_ENV === "production"){
     app.use(express.static("client/build"));
+    const path=require("path")
+    app.get("*",(req,res)=>{
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+    })
 }
 
 app.listen(PORT,()=>{
